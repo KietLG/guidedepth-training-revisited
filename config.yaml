@@ -1,0 +1,55 @@
+# Data
+dataset: "nyu_reduced"
+data_path: "./dataset/train"
+test_path: "./dataset/test/official"
+resolution: "half"
+eval_mode: "alhashim"
+
+# Model
+model: "GuideDepth"
+weights_path: ""
+spatial_attention: false
+skip_connection: "single"
+
+# Training
+batch_size: 8
+learning_rate: 0.0001
+weight_decay: 0
+num_epochs: 20
+scheduler_step_size: 15
+
+# Fine-tuning parameters
+optimizer_type: "adam"
+scheduler_type: "step"
+
+# Loss weight parameters (Depth_Loss = alpha * BerHu + beta * SSIM + gamma * Grad)
+loss_alpha: 0.1
+loss_beta: 1.0
+loss_gamma: 1.0
+
+# Depth Loss Configuration
+depth_loss_type: "berhu"
+berhu_threshold: 0.2
+
+# CutDepth Augmentation
+cutdepth_enable: true
+cutdepth_mode: "rect"
+cutdepth_probability: 0.75
+cutdepth_max_area_ratio: 0.25
+
+# Deep Supervision
+deep_supervision_enable: true
+deep_supervision_weight: 0.1
+
+# LocalBins Auxiliary Head
+localbins_enable: true
+localbins_weight: 0.1
+localbins_nbins: 16
+
+# System
+num_workers: 1
+val_ratio: 0.05
+seed: 42
+confirm_test_eval: true
+eval_val_test_protocol_at_end: false
+run_id: "baseline42+skip_single+berhu0.2+cutdepth_rect0.75+localbins0.1+deep_supervision0.1"
